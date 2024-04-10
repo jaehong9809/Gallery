@@ -7,10 +7,11 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -20,8 +21,10 @@ public class GalleryController {
 
     private final GalleryService galleryService;
     @GetMapping
-    public String gallery(){
+    public String gallery(Model model){
+        List<Picture> pictures = galleryService.findAll();
 
+        model.addAttribute("pictures", pictures);
         return "home";
     }
 
@@ -33,12 +36,16 @@ public class GalleryController {
 
 
     @PostMapping("/add")
-    public String addPicture(@ModelAttribute Picture picture, Model model){
-        Picture inputPicture = galleryService.save(picture);
-        Picture a = galleryService.findById(inputPicture.getId()).get();
 
-        log.info("src = {}", a.getData());
-        model.addAttribute("picture", a);
+    public String addPicture(@RequestParam("pictureName")String pictureName,
+                             @RequestParam("data")MultipartFile data,
+                             Model model){
+        try {
+            Picture picture = new Picture(pictureName, data.getBytes());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        model.addAttribute("picture", pictureName);
         return "redirect:/";
     }
 

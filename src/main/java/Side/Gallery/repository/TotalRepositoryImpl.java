@@ -32,6 +32,6 @@ public class TotalRepositoryImpl implements TotalRepository {
 
     @Override
     public List<Picture> findAll() {
-        return null;
+        return repository.findAll();
     }
 }
