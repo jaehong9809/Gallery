@@ -1,13 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
 <div>
-  <h1> home</h1>
-
+    <h1> home</h1>
+    <table>
+        <tr>
+            <td><img src="img/egg.jpg" alt="이미지 1" width="200" height="150"></td>
+            <td><img src="img/egg.jpg" alt="이미지 2" width="200" height="150"></td>
+        </tr>
+        <tr>
+            <td><img src="img/egg.jpg" alt="이미지 3" width="200" height="150"></td>
+            <td><img  th:src="${picture.data}" src="img/egg.jpg" alt="이미지 4" width="200" height="150"></td>
+        </tr>
+        <!-- 추가 이미지 추가할 수 있음 -->
+    </table>
 </div>
 </body>
 </html>

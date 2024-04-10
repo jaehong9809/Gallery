@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div>
+    add page
+</div>
+
+<form action = 'home.html' th:action method ="post">
+    <div>
+        <label for = "pictureName">그림명</label>
+        <input type="text" id = 'pictureName' name="pictureName" placeholder="그림명 입력">
+    </div>
+    <div>
+        <label for = "data">이미지</label>
+        <input type="file" id = 'data' name="data">
+    </div>
+    <button type="submit">등록</button>
+    <button th:onclick="|location.href='@{/home}'|" type="button">취소</button>
+</form>
+<
+
+</body>
+</html>
