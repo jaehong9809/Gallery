@@ -1,28 +1,27 @@
 package Side.Gallery.domain;
 
 
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
+import jakarta.persistence.*;
 import lombok.Data;
-import org.springframework.data.annotation.Id;
 
 @Data
+@Entity(name ="picturetable" )
 public class Picture {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "item_name", length=20)
+    @Column(name = "name")
     private String pictureName;
 
-    private String URL;
+    private byte[] data;
 
     public Picture(){
     }
 
-    public Picture(String pictureName, String URL){
+    public Picture(String pictureName, byte[] data){
         this.pictureName = pictureName;
-        this.URL = URL;
+        this.data = data;
     }
 }
