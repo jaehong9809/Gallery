@@ -9,7 +9,7 @@
     add page
 </div>
 
-<form action = 'home.html' th:action method ="post">
+<form action = 'home.html' th:action method ="post" enctype="multipart/form-data">
     <div>
         <label for = "pictureName">그림명</label>
         <input type="text" id = 'pictureName' name="pictureName" placeholder="그림명 입력">
@@ -21,6 +21,7 @@
     <button type="submit">등록</button>
     <button th:onclick="|location.href='@{/home}'|" type="button">취소</button>
 </form>
+
 
 
 </body>
