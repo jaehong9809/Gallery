@@ -4,6 +4,8 @@ package Side.Gallery.domain;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.sql.Blob;
+
 @Data
 @Entity(name ="picturetable" )
 public class Picture {
@@ -14,6 +16,7 @@ public class Picture {
 
     @Column(name = "name")
     private String pictureName;
+
 
     private byte[] data;
 
