@@ -2,19 +2,16 @@ package Side.Gallery.service;
 
 import Side.Gallery.domain.Picture;
 import Side.Gallery.repository.TotalRepository;
-import lombok.RequiredArgsConstructor;
-import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
-@Primary
 @Service
-public class GalleryServiceV1 implements GalleryService{
+public class MainServiceImpl implements GalleryService{
     private final TotalRepository pictureRepository;
 
-    public GalleryServiceV1(TotalRepository pictureRepository) {
+    public MainServiceImpl(TotalRepository pictureRepository) {
         this.pictureRepository = pictureRepository;
     }
 

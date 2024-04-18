@@ -2,18 +2,16 @@ package Side.Gallery.repository;
 
 import Side.Gallery.domain.Picture;
 import lombok.RequiredArgsConstructor;
-import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
 
-@Primary
 @Repository
 @Transactional
 @RequiredArgsConstructor
-public class TotalRepositoryImpl implements TotalRepository {
+public class MainRepositoryImpl implements TotalRepository {
     private final PictureRepository repository;
     @Override
     public Picture save(Picture picture) {
