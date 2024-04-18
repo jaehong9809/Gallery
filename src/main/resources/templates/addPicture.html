@@ -3,26 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
 </head>
+<style>
+         body {
+            display: flex;
+            justify-content: center; /* 수평 가운데 정렬 */
+            align-items: center; /* 수직 가운데 정렬 */
+            height: 100vh; /* 화면 높이 전체를 차지하도록 설정 */
+            margin: 0; /* body의 기본 마진 제거 */
+        }
+
+    </style>
 <body>
-<div>
+<div class = "container">
     add page
+    <form class="container" action = 'home.html' th:action method ="post" enctype="multipart/form-data">
+        <div class="container">
+            <label for = "pictureName">그림명</label>
+            <input type="text" id = 'pictureName' name="pictureName" placeholder="그림명 입력">
+        </div>
+        <div class="container">
+            <label for = "data">이미지</label>
+            <input type="file" id = 'data' name="data">
+        </div>
+        <button type="submit">등록</button>
+        <button th:onclick="|location.href='@{/}'|" type="button">취소</button>
+    </form>
 </div>
-
-<form action = 'home.html' th:action method ="post" enctype="multipart/form-data">
-    <div>
-        <label for = "pictureName">그림명</label>
-        <input type="text" id = 'pictureName' name="pictureName" placeholder="그림명 입력">
-    </div>
-    <div>
-        <label for = "data">이미지</label>
-        <input type="file" id = 'data' name="data">
-    </div>
-    <button type="submit">등록</button>
-    <button th:onclick="|location.href='@{/home}'|" type="button">취소</button>
-</form>
-
-
-
 </body>
 </html>

@@ -2,21 +2,36 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pinterest-like Layout</title>
+    <style>
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr); /* 2열 그리드 */
+            gap: 20px; /* 이미지 사이의 간격 */
+            justify-content: center; /* 수평 가운데 정렬 */
+            align-items: center; /* 수직 가운데 정렬 */
+            text-align: center; /* 이미지 내부의 텍스트를 가운데 정렬 */
+            width: 60%;
+        }
+        .image-item {
+            width: 100%; /* 이미지 너비 조정 */
+            height: auto; /* 이미지 높이 자동 조정 */
+        }
+
+
+    </style>
     <title>Title</title>
 </head>
 <body>
-<div>
-    <h1> home</h1>
-    <table>
-        <tr th:each = "picture : ${pictures}">
-            <td><img th:src="'data:image/jpeg;base64,' + ${picture.url}"  alt="이미지 1" width="200" height="150"></td>
-        </tr>
-    </table>
 
+<div class="image-grid">
+    <h2> Gallery</h2>
+    <button class="image-item" th:onclick = "|location.href='@{/gallery/add}'|">이미지 등록</button>
+    <!-- Thymeleaf를 사용하여 이미지들을 반복해서 출력 -->
+    <div th:each="picture : ${pictures}">
+        <img class="image-item" th:src="'data:image/jpeg;base64,' + ${picture.url}" alt="Image"/>
+    </div>
 </div>
-
-<img th:src = "@{'data:image/jpeg;base64,' + ${gg}}"  alt="이미지 12311" width="200" height="150">
-
-
 </body>
 </html>
