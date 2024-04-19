@@ -50,6 +50,13 @@ public class GalleryController {
     public String addPicture(@RequestParam("pictureName")String pictureName,
                              @RequestParam("data")MultipartFile data,
                              Model model) throws IOException {
+        
+        // 파일 입력을 안했을 경우
+        if (data.equals(null)) {
+            return "redirect:/";        
+        }
+        
+
         Picture picture = new Picture(pictureName, data.getBytes());
         galleryService.save(picture);
         model.addAttribute("picture", picture);
