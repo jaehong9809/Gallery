@@ -3,6 +3,7 @@ package Side.Gallery.service;
 import Side.Gallery.domain.Picture;
 import Side.Gallery.repository.TotalRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -15,6 +16,7 @@ public class MainServiceImpl implements GalleryService{
         this.pictureRepository = pictureRepository;
     }
 
+    @Transactional
     @Override
     public Picture save(Picture picture) {
         return pictureRepository.save(picture);
