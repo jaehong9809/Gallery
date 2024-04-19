@@ -30,7 +30,9 @@
     <button class="image-item" th:onclick = "|location.href='@{/gallery/add}'|">이미지 등록</button>
     <!-- Thymeleaf를 사용하여 이미지들을 반복해서 출력 -->
     <div th:each="picture : ${pictures}">
-        <img class="image-item" th:src="'data:image/jpeg;base64,' + ${picture.url}" alt="Image"/>
+        <a th:href = "@{/gallery/picture/{id}(id = ${picture.id})}">
+            <img class="image-item" th:src="'data:image/jpeg;base64,' + ${picture.url}" alt="Image"/>
+        </a>
     </div>
 </div>
 </body>
