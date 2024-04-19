@@ -30,7 +30,10 @@ public class GalleryController {
         List<Picture> pictures = galleryService.findAll();
         List<PictureFeat> delivery = new ArrayList<>();
         for (Picture picture : pictures) {
-            delivery.add(new PictureFeat(picture.getId(), picture.getPictureName(), Base64.getEncoder().encodeToString(picture.getData())));
+            delivery.add(new PictureFeat(
+                    picture.getId(),
+                    picture.getPictureName(),
+                    Base64.getEncoder().encodeToString(picture.getData())));
         }
         model.addAttribute("pictures", delivery);
         return "home";
@@ -51,6 +54,18 @@ public class GalleryController {
         galleryService.save(picture);
         model.addAttribute("picture", picture);
         return "redirect:/";
+    }
+
+    @GetMapping("/picture/{id}")
+    public String onePicture(@PathVariable("id") long id, Model model) {
+        Picture picture = galleryService.findById(id).get();
+        PictureFeat pictureFeat = new PictureFeat(
+                picture.getId(),
+                picture.getPictureName(),
+                Base64.getEncoder().encodeToString(picture.getData()));
+
+        model.addAttribute("picture", pictureFeat);
+        return "onePicture";
     }
 
 }
