@@ -33,6 +33,7 @@ public class MainServiceImpl implements GalleryService{
         return pictureRepository.findAll();
     }
 
+    @Transactional
     @Override
     public void update(Long id, PictureUpdateDto pictureUpdateDto) {
         pictureRepository.update(id, pictureUpdateDto);
