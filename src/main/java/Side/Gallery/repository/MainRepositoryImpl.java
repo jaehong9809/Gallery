@@ -1,6 +1,8 @@
 package Side.Gallery.repository;
 
 import Side.Gallery.domain.Picture;
+import Side.Gallery.domain.PictureFeat;
+import Side.Gallery.domain.PictureUpdateDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,8 +21,10 @@ public class MainRepositoryImpl implements TotalRepository {
     }
 
     @Override
-    public void update(Long pictureId) {
-
+    public void update(Long pictureId, PictureUpdateDto pictureUpdateDto) {
+        Picture picture = repository.findById(pictureId).orElseThrow();
+        picture.setData(pictureUpdateDto.getData());
+        picture.setPictureName(pictureUpdateDto.getPictureName());
     }
 
     @Override
