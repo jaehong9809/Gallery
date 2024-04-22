@@ -3,6 +3,7 @@ package Side.Gallery.webcontroller;
 
 import Side.Gallery.domain.Picture;
 import Side.Gallery.domain.PictureFeat;
+import Side.Gallery.domain.PictureUpdateDto;
 import Side.Gallery.service.GalleryService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -25,6 +26,7 @@ import java.util.List;
 public class GalleryController {
 
     private final GalleryService galleryService;
+
     @GetMapping
     public String gallery(Model model) throws SQLException {
         List<Picture> pictures = galleryService.findAll();
@@ -40,22 +42,21 @@ public class GalleryController {
     }
 
     @GetMapping("/add")
-    public String addPage(){
+    public String addPage() {
         return "addPicture";
     }
 
 
-
     @PostMapping("/add")
-    public String addPicture(@RequestParam("pictureName")String pictureName,
-                             @RequestParam("data")MultipartFile data,
+    public String addPicture(@RequestParam("pictureName") String pictureName,
+                             @RequestParam("data") MultipartFile data,
                              Model model) throws IOException {
-        
+
         // 파일 입력을 안했을 경우
         if (data.equals(null)) {
-            return "redirect:/";        
+            return "redirect:/";
         }
-        
+
 
         Picture picture = new Picture(pictureName, data.getBytes());
         galleryService.save(picture);
@@ -73,6 +74,26 @@ public class GalleryController {
 
         model.addAttribute("picture", pictureFeat);
         return "onePicture";
+    }
+
+    @GetMapping("/picture/{id}/update")
+    public String updateOnePicture(@PathVariable("id") long id, Model model) {
+        Picture picture = galleryService.findById(id).get();
+        PictureFeat pictureFeat = new PictureFeat(
+                picture.getId(),
+                picture.getPictureName(),
+                Base64.getEncoder().encodeToString(picture.getData()));
+        model.addAttribute("picture", pictureFeat);
+        return "updateOnePicture";
+    }
+
+    @PostMapping("/picture/{id}/update")
+    public String update(@PathVariable("id") long id,
+                         @RequestParam("pictureName") String pictureName,
+                         @RequestParam("data") MultipartFile data) throws IOException {
+        PictureUpdateDto pictureUpdateDto = new PictureUpdateDto(pictureName, data.getBytes());
+        galleryService.update(id, pictureUpdateDto);
+        return "redirect:/gallery/picture/"+id;
     }
 
 }
