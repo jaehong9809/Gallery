@@ -1,6 +1,7 @@
 package Side.Gallery.service;
 
 import Side.Gallery.domain.Picture;
+import Side.Gallery.domain.PictureUpdateDto;
 import Side.Gallery.repository.TotalRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,12 +25,16 @@ public class MainServiceImpl implements GalleryService{
 
     @Override
     public Optional<Picture> findById(Long id) {
-
         return pictureRepository.findById(id);
     }
 
     @Override
     public List<Picture> findAll() {
         return pictureRepository.findAll();
+    }
+
+    @Override
+    public void update(Long id, PictureUpdateDto pictureUpdateDto) {
+        pictureRepository.update(id, pictureUpdateDto);
     }
 }
